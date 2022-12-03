@@ -97,20 +97,13 @@ def solve_part_2(path: str):
         for x in range(3):
             row_value = data.pop(0)[0]
             strings.append(row_value)
+        
         string_0 = strings[0]
         string_1 = strings[1]
         string_2 = strings[2]
 
         # get overlap in strings
-        partial_set = set(string_0) & set(string_1)
-        intersection = partial_set & set(string_2)
-
-        # Wrong
-        # partial_overlap = get_overlap(string_0, string_1)
-        # print(f'partial_overlap={partial_overlap}')
-        # overlap = get_overlap(partial_overlap, string_2)
-        # print(f'overlap={overlap}')
-
+        intersection = set(string_0) & set(string_1) & set(string_2)
         intersection_char = next(iter(intersection))
         
         priority = CHAR_PRIORITIES[intersection_char]
