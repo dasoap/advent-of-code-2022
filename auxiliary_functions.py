@@ -14,11 +14,13 @@ def read_csv_data(path: str):
 
 def read_lines(path: str):
     # read file using readlines()
+    # 'r' is default
     file = open(path, 'r')
     lines = file.readlines()
 
     # remove \n and whitespaces
-    lines = [x.replace("\n", "").strip() for x in lines]
+    # replace not needed. lines = [x.replace("\n", "").strip() for x in lines]
+    lines = [x.strip() for x in lines]
 
     return lines
 

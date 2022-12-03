@@ -1,5 +1,6 @@
 from auxiliary_functions import read_csv_data
 
+# See beautiful (AI generated!) solution here: https://imgur.com/Xd2ELkC
 
 CHAR_PRIORITIES = {
     "a": 1,
@@ -28,7 +29,7 @@ CHAR_PRIORITIES = {
     "x": 24,
     "y": 25,
     "z": 26,
-    # Maybe use to_uppercase
+
     "A": 27,
     "B": 28,
     "C": 29,
@@ -57,12 +58,12 @@ CHAR_PRIORITIES = {
     "Z": 52
 }
 
-
-import difflib
-def get_overlap(s1, s2):
-    s = difflib.SequenceMatcher(None, s1, s2)
-    pos_a, pos_b, size = s.find_longest_match(0, len(s1), 0, len(s2)) 
-    return s1[pos_a:pos_a+size]
+# This was the first attempt to solve the issue. It worked for part 1 but not for part 2. The current solution is better.
+# import difflib
+# def get_overlap(s1, s2):
+#     s = difflib.SequenceMatcher(None, s1, s2)
+#     pos_a, pos_b, size = s.find_longest_match(0, len(s1), 0, len(s2)) 
+#     return s1[pos_a:pos_a+size]
 
 
 def solve_part_1(path: str):
@@ -70,17 +71,18 @@ def solve_part_1(path: str):
 
     result = 0
     for row in data:
-        row = row[0]
+        rucksack_string = row[0]
 
-        # split string at half
-        first_half = row[:len(row)//2]
-        second_half = row[len(row)//2:]
+        # Split compartment string in half
+        first_half = rucksack_string[:len(rucksack_string)//2]
+        second_half = rucksack_string[len(rucksack_string)//2:]
 
-        # get overlap in string
-        overlap = get_overlap(first_half, second_half)
+        # Calculate intersection of both strings
+        intersection = set(first_half) & set(second_half)
+        intersecting_char = next(iter(intersection))
 
-        # put overlap into dict
-        priority = CHAR_PRIORITIES[overlap]
+        # Put intersectiing char into dict to get the priority value
+        priority = CHAR_PRIORITIES[intersecting_char]
 
         # Sum results
         result += priority
