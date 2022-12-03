@@ -1,5 +1,4 @@
-from auxiliary_functions import timing
-import csv
+from auxiliary_functions import read_csv_data
 from enum import Enum
 
 
@@ -12,24 +11,16 @@ class Shape(Enum):
 
 # Calculate outcome and add respective points: 0 if you lost, 3 if the round was a draw, and 6 if you won
 class Outcome(Enum):
-    LOSE = 0
+    LOSS = 0
     DRAW = 3
     WIN = 6
 
 
-def read_csv_data(path: str):
-    csvfile = open(path, 'r', newline='')
-    data = csv.reader(csvfile, delimiter=' ')
-    # for row in data:
-        # print(', '.join(row))
-    return data
-
-
 def solve_part_1(path: str):
-    strategy_guide = read_csv_data(path)
+    data = read_csv_data(path)
     
     total_score = 0
-    for row in strategy_guide:
+    for row in data:
         opponent = row[0]
         me = row[1]
 
@@ -45,7 +36,7 @@ def solve_part_1(path: str):
                     case 'A':
                         outcome_of_round += Outcome.DRAW.value # RR = Draw
                     case 'B':
-                        outcome_of_round += Outcome.LOSE.value # RP = Lose
+                        outcome_of_round += Outcome.LOSS.value # RP = Lose
                     case 'C':
                         outcome_of_round += Outcome.WIN.value # RS = Win
             case 'Y':
@@ -57,13 +48,13 @@ def solve_part_1(path: str):
                     case 'B':
                         outcome_of_round += Outcome.DRAW.value # PP = Draw --> There was a bug
                     case 'C':
-                        outcome_of_round += Outcome.LOSE.value # PS = Lose
+                        outcome_of_round += Outcome.LOSS.value # PS = Lose
             case 'Z':
                 outcome_of_round += Shape.SCISSORS.value
 
                 match opponent:
                     case 'A':
-                        outcome_of_round += Outcome.LOSE.value
+                        outcome_of_round += Outcome.LOSS.value
                     case 'B':
                         outcome_of_round += Outcome.WIN.value
                     case 'C':
@@ -74,10 +65,10 @@ def solve_part_1(path: str):
 
 
 def solve_part_2(path: str):
-    updated_strategy_guide = read_csv_data(path)
+    data = read_csv_data(path)
     
     total_score = 0
-    for row in updated_strategy_guide:
+    for row in data:
         opponent = row[0]
         me = row[1]
 
@@ -88,14 +79,14 @@ def solve_part_2(path: str):
         match me:
             case 'X':
                 # I will lose
-                outcome_of_round += Outcome.LOSE.value
+                outcome_of_round += Outcome.LOSS.value
 
                 match opponent:
                     case 'A':
                         # Opponent plays Rock --> Scissors to lose
                         outcome_of_round += Shape.SCISSORS.value
                     case 'B':
-                        # Opponent plays Paper -->  Rock to lose
+                        # Opponent plays Paper --> Rock to lose
                         outcome_of_round += Shape.ROCK.value
                     case 'C':
                         # Opponent plays Scissors --> Paper to lose
@@ -127,6 +118,7 @@ def solve_part_2(path: str):
     print(f'Solution of part 2 = {total_score}')
 
 
-def solve(path: str):
+def solve():
+    path = 'day_02/input.txt'
     solve_part_1(path)
     solve_part_2(path)
