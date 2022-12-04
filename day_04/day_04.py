@@ -10,13 +10,8 @@ def solve_part_1(path: str):
         second_elf = row[1]
 
         # Get ranges from string: 'a-b' --> Get a: all chars before '-'. Get b: rest, or all chars after '-'
-        first_ranges = first_elf.split('-')
-        second_ranges = second_elf.split('-')
-
-        first_start = int(first_ranges[0])
-        first_end = int(first_ranges[1])
-        second_start = int(second_ranges[0])
-        second_end = int(second_ranges[1])
+        first_start, first_end = map(int, first_elf.split('-'))
+        second_start, second_end = map(int, second_elf.split('-'))
 
         if first_start <= second_start:
             # second might be contained in first
@@ -42,16 +37,16 @@ def solve_part_2(path: str):
         second_elf = row[1]
 
         # Get start and end of first and second elf
-        first_start, first_end = int(first_elf.split('-')[0]), int(first_elf.split('-')[1])
-        second_start, second_end = int(second_elf.split('-')[0]), int(second_elf.split('-')[1])
+        first_start, first_end = map(int, first_elf.split('-'))
+        second_start, second_end = map(int, second_elf.split('-'))
 
         # Get ranges for first and second elf
         first_range = list(range(first_start,first_end+1))
         second_range = list(range(second_start,second_end+1))
 
         # Check if lists overlap using intersection
-        do_overlap = bool(set(first_range) & set(second_range))
-        if do_overlap:
+        does_overlap = bool(set(first_range) & set(second_range))
+        if does_overlap:
             result += 1
 
     print(f'Solution of part 2 = {result}')
@@ -61,6 +56,5 @@ def solve():
     path = 'day_04/input.txt'
     solve_part_1(path)
     solve_part_2(path)
-
-
+    
 # Time to solve: 00:26:39
