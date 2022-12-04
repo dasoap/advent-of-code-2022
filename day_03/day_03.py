@@ -1,6 +1,5 @@
 from auxiliary_functions import read_csv_data
 
-# See beautiful (AI generated!) solution here: https://imgur.com/Xd2ELkC
 
 CHAR_PRIORITIES = {
     "a": 1,
@@ -117,3 +116,7 @@ def solve():
     path = 'day_03/input.txt'
     solve_part_1(path)
     solve_part_2(path)
+
+# Time to solve: 00:51:03
+
+# See beautiful (AI generated!) solution here: https://imgur.com/Xd2ELkC

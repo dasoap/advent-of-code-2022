@@ -5,7 +5,7 @@ import csv
 
 def read_csv_data(path: str):
     csvfile = open(path, 'r', newline='')
-    reader = csv.reader(csvfile, delimiter=' ')
+    reader = csv.reader(csvfile, delimiter=',')
     data = list(reader)
     # for row in data:
         # print(', '.join(row))

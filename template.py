@@ -25,3 +25,5 @@ def solve():
     path = 'day_0X/input.txt'
     solve_part_1(path)
     solve_part_2(path)
+
+# Time to solve: 00:00:00
